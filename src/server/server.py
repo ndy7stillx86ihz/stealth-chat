@@ -3,7 +3,7 @@ import threading as t
 import logging
 
 from ..config import Config
-from .events import *
+from .enums import Event
 from .interfaces import IEventListener
 from .managers.connection_manager import ConnectionManager
 from .models import ClientConnection
@@ -15,7 +15,9 @@ class Server(IEventListener):
     #     para introducir comandos desde ahi
     #  - validar que no se conecten mas clientes
     #     de los permitidos
-    #   - implementar end-to-end encryption :D
+    #  - implementar end-to-end encryption
+    #  - implementar un sistema de autenticacion
+
     def __init__(self, host: str, port: int, max_conns: int):
         Config.setup_logging()
 
@@ -26,10 +28,10 @@ class Server(IEventListener):
         self.socket_server = s.socket(s.AF_INET, s.SOCK_STREAM)
         self.connection_manager = ConnectionManager()
         self.connection_manager.publisher.subscribe(
-            CLIENT_DISCONNECTED,
-            CLIENT_REMOVED,
-            CLIENT_CONNECTED,
-            CLIENT_RECONNECTED,
+            Event.CLIENT_DISCONNECTED,
+            Event.CLIENT_REMOVED,
+            Event.CLIENT_CONNECTED,
+            Event.CLIENT_RECONNECTED,
             listener=self
         )
 
