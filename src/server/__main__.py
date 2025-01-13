@@ -1,7 +1,7 @@
 import sys
 import argparse
 
-from ..config import Config
+from .config import Config
 from .server import Server
 
 def main() -> int:

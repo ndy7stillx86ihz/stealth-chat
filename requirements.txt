@@ -1,1 +1,2 @@
-pyreadline~=2.0; sys_platform == 'win32'
+-r src/server/requirements.txt
+-r src/client/requirements.txt

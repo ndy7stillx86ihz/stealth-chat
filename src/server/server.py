@@ -2,7 +2,7 @@ import socket as s
 import threading as t
 import logging
 
-from ..config import Config
+from .config import Config
 from .enums import Event
 from .interfaces import IEventListener
 from .managers.connection_manager import ConnectionManager
@@ -15,8 +15,11 @@ class Server(IEventListener):
     #     para introducir comandos desde ahi
     #  - validar que no se conecten mas clientes
     #     de los permitidos
+    #       - actualizacion:
+    #           el 3er cliente se conecta pero no envian sus mensajes: !!arreglar!!
     #  - implementar end-to-end encryption
     #  - implementar un sistema de autenticacion
+    #  - procesar comandos de los clientes
 
     def __init__(self, host: str, port: int, max_conns: int):
         Config.setup_logging()
@@ -62,8 +65,13 @@ class Server(IEventListener):
         logging.info('listening for incoming connections...')
         while self.running:
             try:
+                # todo: buscar como conseguir la direccion, sin aceptar la conexion
+
                 c_socket, c_addr = self.socket_server.accept()
                 client = ClientConnection(socket=c_socket, address=c_addr)
+                if len(self.connection_manager.clients) + 1 > self.max_conns:
+                    self._reject_connection(client)
+                    continue
                 self.connection_manager.add_client(client)
                 logging.info(f'connection from {client} [{len(self.connection_manager.clients)}/{self.max_conns}]')
 
@@ -105,13 +113,18 @@ class Server(IEventListener):
             self.connection_manager.remove_client(client)
             logging.info(f'client at {client} removed [{len(self.connection_manager.clients)}/{self.max_conns}]')
 
+    def _reject_connection(self, client: ClientConnection) -> None:
+        logging.warning(f'connection from {client} rejected, maximum connections reached')
+        self.server_command(f'reject {client}')
+
     def server_broadcast(self, message: str) -> None:
         self.connection_manager.broadcast(
             f'\n\033[38;5;214m### {message.upper()} ###\033[0m\n', None)
 
     def server_command(self, command: str, *args) -> None:
+        # todo: cambiar el nombre, no es tanto comandos lo que mando, como estados
         self.connection_manager.broadcast(
             f':command {command} {" ".join(args)}', None)
 
-    def update(self, d: str) -> None:
+    def update(self, e: 'Event', d: str) -> None:
         self.server_broadcast(d)

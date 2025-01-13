@@ -3,6 +3,8 @@ from dataclasses import dataclass
 
 @dataclass(slots=True, frozen=True)
 class ClientConnection:
+    # todo: asignar un id a cada conexion, para poder identificarlas
+    #       y pasarla a la app del cliente tambien mediante los comandos del server
     socket: SocketType
     address: tuple[str, int]
 

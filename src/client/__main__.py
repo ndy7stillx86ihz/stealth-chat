@@ -4,8 +4,8 @@ from .client import Client
 
 def main() -> int:
     parser = argparse.ArgumentParser(description='socket chat client')
-    parser.add_argument('--host', type=str, default='127.0.0.1', help='server address')
-    parser.add_argument('--port', type=int, default=50000, help='server port')
+    parser.add_argument('--host', '-H', type=str, default='127.0.0.1', help='server address')
+    parser.add_argument('--port', '-p', type=int, default=50000, help='server port')
 
     try:
         args = parser.parse_args()

@@ -18,4 +18,4 @@ class EventManager:
 
     def notify(self, event_type: 'Event', data: Any = None):
         for l in self.listeners[event_type]:
-            l.update(data)
+            l.update(event_type, data)

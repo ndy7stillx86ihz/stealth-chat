@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 ## Known Issues
 
-1. **Bad software design:** I'd rather to use a better architecture for more scalability, right now is a hell modifying anything because of  the messy code
+1. **Bad software design:** I'd rather to use a better architecture for more scalability, right now is a hell modifying anything because of the messy code
 
 2. **Not encrypted messages:** It's my next goal for the project
 

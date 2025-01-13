@@ -4,4 +4,4 @@ from typing import Any, Optional
 
 class IEventListener(ABC):
     @abstractmethod
-    def update(self, d: Optional[Any]) -> None: pass
+    def update(self,e: 'Event',  d: Optional[Any]) -> None: pass
