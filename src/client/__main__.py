@@ -1,6 +1,6 @@
 import sys
 import argparse
-from .client import Client
+from .domain import Client
 
 def main() -> int:
     parser = argparse.ArgumentParser(description='socket chat client')
@@ -9,10 +9,10 @@ def main() -> int:
 
     try:
         args = parser.parse_args()
-        MIN_PORT = 2 ** 10
-        MAX_PORT = 2 ** 16 - 1
-        if not MIN_PORT < args.port < MAX_PORT: #
-            raise ValueError(f'port number must be between {MIN_PORT} and {MAX_PORT}')
+        min_port = 2 ** 10  # 1024
+        max_port = 2 ** 16 - 1  # 65535
+        if not min_port < args.port < max_port:
+            raise ValueError(f'port number must be between {min_port} and {max_port}')
     except Exception as e:
         parser.error(str(e))
 
@@ -20,6 +20,7 @@ def main() -> int:
     client.start()
 
     return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())

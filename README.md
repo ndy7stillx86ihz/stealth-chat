@@ -1,5 +1,5 @@
 # CLI Socket Based Chat
-   ![app-sample](sample/image-20241229034504006.png)
+   ![app-sample](sample/ui-example.png)
 
 
 ## Description

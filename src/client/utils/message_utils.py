@@ -13,6 +13,7 @@ class MessageUtils:
 
     @staticmethod
     def format_received_message(message: str, is_server: bool) -> str:
+        # todo: al formatear mal no se estan procesando bien los mensajes, fix!
         prompt_prefix = ":: " if not is_server else "### "
         prompt_suffix = "" if not is_server else " ###"
         color = ANSI.CYAN if not is_server else ANSI.ORANGE
