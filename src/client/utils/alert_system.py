@@ -1,6 +1,6 @@
 import sys
 
-from .message_formatter import MessageFormatter
+from .message_utils import MessageUtils
 
 
 class AlertSystem:
@@ -10,6 +10,6 @@ class AlertSystem:
     @staticmethod
     def alert(message: str, error: bool = False):
         if error:
-            sys.stderr.write(MessageFormatter.format_alerts(message, error))
+            sys.stderr.write(MessageUtils.format_alerts(message, error))
             return
-        sys.stdout.write(MessageFormatter.format_alerts(message, error))
+        sys.stdout.write(MessageUtils.format_alerts(message, error))

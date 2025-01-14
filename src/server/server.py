@@ -118,8 +118,7 @@ class Server(IEventListener):
         self.server_command(f'reject {client}')
 
     def server_broadcast(self, message: str) -> None:
-        self.connection_manager.broadcast(
-            f'\n\033[38;5;214m### {message.upper()} ###\033[0m\n', None)
+        self.connection_manager.broadcast(message.upper(), None)
 
     def server_command(self, command: str, *args) -> None:
         # todo: cambiar el nombre, no es tanto comandos lo que mando, como estados

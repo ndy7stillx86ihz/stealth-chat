@@ -1,7 +1,7 @@
-from .ansi import ANSI
+from .ansi_colors import ANSI
 
 
-class MessageFormatter:
+class MessageUtils:
     INPUT_PROMPT_SYMBOL = '>> '
     RECEIVED_PROMPT_SYMBOL = '::'
     INPUT_PROMPT = f"{ANSI.YELLOW}{INPUT_PROMPT_SYMBOL}{ANSI.RESET}"
@@ -13,9 +13,11 @@ class MessageFormatter:
 
     @staticmethod
     def format_received_message(message: str, is_server: bool) -> str:
-        prompt = ":: " if not is_server else ""
-        color = ANSI.CYAN if not is_server else ""
-        return f"{color}{prompt}{message}{ANSI.RESET}\n"
+        prompt_prefix = ":: " if not is_server else "### "
+        prompt_suffix = "" if not is_server else " ###"
+        color = ANSI.CYAN if not is_server else ANSI.ORANGE
+
+        return f"{color}{prompt_prefix}{message}{prompt_suffix}{ANSI.RESET}\n"
 
     @staticmethod
     def format_alerts(message: str, error: bool) -> str:

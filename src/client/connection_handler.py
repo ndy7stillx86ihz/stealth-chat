@@ -3,7 +3,7 @@ import sys
 
 from typing import Optional
 
-from .alert_system import AlertSystem
+from .utils import AlertSystem
 
 
 class ConnectionHandler:

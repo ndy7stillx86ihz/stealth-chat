@@ -1,7 +1,7 @@
 import sys
 import readline
 
-from .message_formatter import MessageFormatter as Formatter
+from ..utils import MessageUtils as Formatter
 
 
 class Message(str):

@@ -4,8 +4,8 @@ import threading as t
 
 from .command_processor import CommandProcessor
 from .connection_handler import ConnectionHandler
-from .message_formatter import MessageFormatter
-from .message_model import Message
+from .utils import MessageUtils
+from .models import Message
 
 
 class Client:
@@ -13,7 +13,7 @@ class Client:
     #       le esta respondiendo, asi que debo poner algun sistema para parchear esto
     def __init__(self, host='127.0.0.1', port=50000):
         self.connection = ConnectionHandler(host, port)
-        self.formatter = MessageFormatter()
+        self.formatter = MessageUtils()
         self.command_processor = CommandProcessor(self)
         self.input_count = 0
 
