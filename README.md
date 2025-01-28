@@ -37,7 +37,7 @@ poetry install
 ##### **Now you should be able to run the main script:**
 
 ```sh
-start --help  # to see script overview
+poetry run start --help  # to see script overview
 ```
 
 ### Server
@@ -45,7 +45,7 @@ start --help  # to see script overview
 #### To start the server, run the following command:
 
 ```bash
-start server -p <port> -H <hostdir> -m <max-connections>
+poetry run start server -p <port> -H <hostdir> -m <max-connections>
 ```
 
 
@@ -56,7 +56,7 @@ start server -p <port> -H <hostdir> -m <max-connections>
 #### After someone hosts the server, enter the retrieved info
 
 ```bash
-start client -p <server-port> -H <server-host>
+poetry run start client -p <server-port> -H <server-host>
 ```
 
 > At first, you'll need to wait for the other peer to connect, you'll be able to send messages, but no one will receive them, whenever the peer sets up, the server will notify every client that there's at least one user to chat with.
