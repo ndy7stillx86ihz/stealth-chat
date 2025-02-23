@@ -1,66 +1,71 @@
-# CLI Socket Based Chat
+# CLI Socket Chat
    ![app-sample](sample/ui-example.png)
 
 
 ## Description
 
-Implementation of a chat using the [socket](https://docs.python.org/3/library/socket.html) library in Python using  the client-server-client model. The server is a multithreaded server that can handle multiple clients at the same time. It  is able to broadcast messages, execute specific commands for event handling, for communicating with clients. Both clients can chat with each other freely, while the server handles the communication between them. 
+Project that using the **[socket](https://docs.python.org/3/library/socket.html)** library in **Python**, through the *client-server-client* model implements a minimalistic *CLI Chat*. The server is a module that can handle multiple clients at the same time using the multi-threading functionalities. It's able to broadcast messages, execute specific commands for event handling, for communicating with clients. Both clients can chat with each other freely, while the server handles the communication between them. 
 
 ## Installation and usage
+
+### Setting up environment
+
+#### **If you don't have [Poetry](https://python-poetry.org) installed:**
+
+##### Linux, Mac-OS, WSL:
+
+```sh
+curl -sSL https://install.python-poetry.org | python3 -
+```
+
+##### Windows:
+
+```powershell
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
+```
+
+###### If you have installed Python through the Microsoft Store, replace `py` with `python` in the command above.
+
+> Refer to [Poetry installation docs](https://python-poetry.org/docs/#installing-with-the-official-installer) for verifying, or getting more info
+
+#### Install project dependencies
+
+```bash
+poetry install
+```
+
+##### **Now you should be able to run the main script:**
+
+```sh
+poetry run start --help  # to see script overview
+```
 
 ### Server
 
 #### To start the server, run the following command:
 
 ```bash
-python3 setup.py server -p <port> -H <hostdir> -m <max-connections>
+poetry run start server -p <port> -H <hostdir> -m <max-connections>
 ```
 
-###### 		  Or replace `python setup.py` with `./setup` and keep the same arguments as above.
 
 > **Be sure of setting up the server before trying to connect with client,  if not, you'll get an exception**
 
 ### Client
 
-#### After setting up the server, enter the same arguments for connecting with the client
+#### After someone hosts the server, enter the retrieved info
 
 ```bash
-python3 setup.py client -p <server-port> -H <server-host>
+poetry run start client -p <server-port> -H <server-host>
 ```
-
-###### As before you can also use the `./setup` binary instead of using python directly
 
 > At first, you'll need to wait for the other peer to connect, you'll be able to send messages, but no one will receive them, whenever the peer sets up, the server will notify every client that there's at least one user to chat with.
-
-### *To Windows users\**
-
-#### You must create a virtual environment, and install the `requirements.txt` file, in this project the library `readline` is used, it is included in the python *builtins* modules in Linux, but not in Windows
-
-#### 1. Create a virtual environment
-
-```cmd
-python -m venv .venv
-```
-
-#### 2. Activate the environment
-
-```cmd
-.\.venv\Scripts\activate
-```
-
-#### 3.  Install the `requirements.txt`
-
-```cmd
-pip install -r requirements.txt
-```
 
 ## Known Issues
 
 1. **Bad software design:** I'd rather to use a better architecture for more scalability, right now is a hell modifying anything because of the messy code
 
-2. **Not encrypted messages:** It's my next goal for the project
-
-3. **Poor Exceptions handling** 
+2. **Not encrypted messages:** Actually working on this issue
 
 4. **Clients not being disconnected after closing server:** Sometimes after *KeyboardInterrumpting* the Server, the clients may just close as it's meant to be, but can also bug like receiving infinites messages.
 
