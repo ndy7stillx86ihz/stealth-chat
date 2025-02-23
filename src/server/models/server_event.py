@@ -1,6 +1,7 @@
-from enum import Enum
+from commons.abstracts.event import Event
 
-class Event(Enum):
+
+class ServerEvent(Event):
     CLIENT_REMOVED = 1
     CLIENT_CONNECTED = 2
     FULL_SERVER = 3

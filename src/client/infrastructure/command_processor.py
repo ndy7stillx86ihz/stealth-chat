@@ -1,9 +1,9 @@
 class CommandProcessor:
-    def __init__(self, client: "Client"):
+    def __init__(self, client: "Client"):  # type: ignore
         self.client = client
 
     def process(self, command: str) -> bool:
-        print('mi oppppppppppppp') # todo: los comandos se estan procesando?
+        print('mi oppppppppppppp')  # todo: los comandos se estan procesando?
         args = command.split()
         if not args:
             return False

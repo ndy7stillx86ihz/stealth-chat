@@ -1,5 +1,7 @@
 from typing import Dict, List, Any
+from ..abstracts import Event
 from ..interfaces import IEventListener
+
 
 class EventManager:
     def __init__(self, *event_types: 'Event'):

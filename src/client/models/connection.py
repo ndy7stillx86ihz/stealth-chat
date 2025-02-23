@@ -2,10 +2,13 @@ import socket
 
 from .message import Message
 
+
 class Connection:
     BUFFER_SIZE = 1024
 
     def __init__(self, host: str, port: int):
+        self.host = host
+        self.port = port
         self.server_address = (host, port)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.running = False

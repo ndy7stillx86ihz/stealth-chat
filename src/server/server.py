@@ -2,10 +2,11 @@ import socket as s
 import threading as t
 import logging
 
+from commons.interfaces import IEventListener
+
 from .config import Config
-from .enums import Event
-from .interfaces import IEventListener
-from .managers.connection_manager import ConnectionManager
+from .models import ServerEvent as Event
+from .application.connection_manager import ConnectionManager
 from .models import ClientConnection
 
 
@@ -55,7 +56,7 @@ class Server(IEventListener):
 
     def shutdown(self) -> None:
         logging.info('shutting down server...')
-        
+
         self.server_broadcast('server shutdown, goodbye!')
         self.server_command('shutdown')
         self.running = False
@@ -73,7 +74,8 @@ class Server(IEventListener):
                     self._reject_connection(client)
                     continue
                 self.connection_manager.add_client(client)
-                logging.info(f'connection from {client} [{len(self.connection_manager.clients)}/{self.max_conns}]')
+                logging.info(
+                    f'connection from {client} [{len(self.connection_manager.clients)}/{self.max_conns}]')
 
                 t.Thread(
                     name=f'thread-{client}',
@@ -111,10 +113,12 @@ class Server(IEventListener):
             logging.error(f'error handling client {client}: {e}')
         finally:
             self.connection_manager.remove_client(client)
-            logging.info(f'client at {client} removed [{len(self.connection_manager.clients)}/{self.max_conns}]')
+            logging.info(
+                f'client at {client} removed [{len(self.connection_manager.clients)}/{self.max_conns}]')
 
     def _reject_connection(self, client: ClientConnection) -> None:
-        logging.warning(f'connection from {client} rejected, maximum connections reached')
+        logging.warning(
+            f'connection from {client} rejected, maximum connections reached')
         self.server_command(f'reject {client}')
 
     def server_broadcast(self, message: str) -> None:

@@ -5,14 +5,14 @@ from ..utils import MessageUtils
 
 
 class MessageRenderer:
-    from ..domain import Message
+    from ..models import Message
 
     @staticmethod
     def display(message: 'Message') -> None:
         """output messages and avoids input overlapping"""
         cleaned_msg = message.normalize()
 
-        cleaned_line: callable[[str], str] = lambda msg: (
+        cleaned_line: callable[[str], str] = lambda msg: ( # type: ignore
             f'\r{" " * (len(msg) + len(MessageUtils.INPUT_PROMPT_SYMBOL))}\r'
         )
 

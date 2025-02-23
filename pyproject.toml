@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "cli-socket-chat"
+version = "0.2.0"
+description = "Secure CLI P2P Chat"
+authors = ["ndy7stillx86ihz <klyman047@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [{ include = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cryptography = ">=44.0.0,<44.1.0"
+pyreadline = { version = ">=2.0,<3.0", markers = "sys_platform == 'win32'" }
+
+[tool.poetry.scripts]
+chat = "run:main"
+server = "server.__main__:main"
+client = "client.__main__:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
