@@ -18,6 +18,12 @@ Project that using the **[socket](https://docs.python.org/3/library/socket.html)
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
+##### Or in Debian:
+
+```bash
+apt install python3-poetry 
+```
+
 ##### Windows:
 
 ```powershell
@@ -61,13 +67,15 @@ poetry run start client -p <server-port> -H <server-host>
 
 > At first, you'll need to wait for the other peer to connect, you'll be able to send messages, but no one will receive them, whenever the peer sets up, the server will notify every client that there's at least one user to chat with.
 
+## Use Cases
+
+If you find yourself in an insecure network, probably public, or just your job's intranet, can't access social media, or just don't want to distract yourself from your console, and wanna talk to a friend, maybe your couple or a crush, then you can bind the server to your local network, and after both peers getting the client, just start to chat.
+
 ## Known Issues
 
-1. **Bad software design:** I'd rather to use a better architecture for more scalability, right now is a hell modifying anything because of the messy code
+1. **Not encrypted messages:** Actually working on this issue
 
-2. **Not encrypted messages:** Actually working on this issue
-
-4. **Clients not being disconnected after closing server:** Sometimes after *KeyboardInterrumpting* the Server, the clients may just close as it's meant to be, but can also bug like receiving infinites messages.
+2. **Clients not being disconnected after closing server:** Sometimes after *KeyboardInterrumpting* the Server, the clients may just close as it's meant to be, but can also bug like receiving infinites messages.
 
    #### If you find any other Issue, please feel free to report it, or collaborating with the project :)
 

@@ -1,10 +1,7 @@
-from typing import Self
-
-
 class Client:
     ID = 0
 
-    def __new__(cls, *args, **kwargs) -> Self:
+    def __new__(cls, *args, **kwargs):
         cls.ID += 1
         return super().__new__(cls)
 

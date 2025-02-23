@@ -8,12 +8,12 @@ readme = "README.md"
 packages = [{ include = "src" }]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 cryptography = ">=44.0.0,<44.1.0"
 pyreadline = { version = ">=2.0,<3.0", markers = "sys_platform == 'win32'" }
 
 [tool.poetry.scripts]
-chat = "run:main"
+start = "run:main"
 server = "server.__main__:main"
 client = "client.__main__:main"
 
