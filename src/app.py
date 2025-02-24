@@ -17,7 +17,6 @@ def run_module(module, host, port, max_conns=None):
         try:
             module_main()
         except KeyboardInterrupt:
-            print("\nquitting...")
             sys.exit(0)
     finally:
         sys.argv = original_argv  # Restaura sys.argv
@@ -47,6 +46,4 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        print('\nquitting...')
-    finally:
         sys.exit(0)

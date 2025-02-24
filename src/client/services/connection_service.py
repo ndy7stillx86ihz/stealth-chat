@@ -22,7 +22,7 @@ class ConnectionService:
 
             self.request_status()
         except (ConnectionRefusedError, socket.gaierror) as e:
-            self.publisher.notify(ClientEvent.CONNECTION_REFUSED, e)
+            self.publisher.notify(ClientEvent.CONNECTION_REFUSED, str(e))
             sys.exit(1)
 
     def disconnect(self, reason: str):

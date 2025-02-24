@@ -23,5 +23,5 @@ class MessageUtils:
     @staticmethod
     def format_alerts(message: str, error: bool) -> str:
         symbol = '---' if error else '+++'
-        prefix = ANSI.RED if error else ANSI.MAGENTA
-        return f"{prefix}{symbol} {message.upper()} {symbol}{ANSI.RESET}\n"
+        color = ANSI.RED if error else ANSI.MAGENTA
+        return f"\n{color}{symbol} {message.upper()} {symbol}{ANSI.RESET}\n"

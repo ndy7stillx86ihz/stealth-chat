@@ -102,7 +102,9 @@ class Server(IEventListener):
                 msg_log = f'message from {client}'
                 if Config.DEBUG:
                     msg_log += f': \'{message}\''
-                logging.info(msg_log)
+                    logging.debug(msg_log)
+                else:
+                    logging.info(msg_log)
 
                 self.connection_manager.broadcast(message, client)
         except ConnectionError as e:

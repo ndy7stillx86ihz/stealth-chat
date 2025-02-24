@@ -1,7 +1,7 @@
 import sys
 import argparse
 
-from client.infrastructure.client_service import ClientService
+from client.services.client_service import ClientService
 from .models import Client
 
 
