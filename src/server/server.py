@@ -1,4 +1,5 @@
 import socket as s
+import ssl
 import threading as t
 import logging
 
@@ -28,8 +29,15 @@ class Server(IEventListener):
         self.host = host
         self.port = port
         self.max_conns = max_conns
-        self.running = False
+
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.load_cert_chain('certs/server.crt', 'certs/server.key')
+        self.ssl_context = context
+
         self.socket_server = s.socket(s.AF_INET, s.SOCK_STREAM)
+
+        self.running = False
+
         self.connection_manager = ConnectionManager()
         self.connection_manager.publisher.subscribe(
             Event.CLIENT_DISCONNECTED,
@@ -46,7 +54,12 @@ class Server(IEventListener):
             self.socket_server.bind(BINDING_ADDR)
             self.socket_server.listen()
             self.running = True
+
+            self.ssocket = self.ssl_context.wrap_socket(
+                self.socket_server, server_side=True)
+
             logging.info(f'server started at {self.host}:{self.port}')
+
             self.accept_connections()
 
         except Exception as e:
@@ -60,15 +73,14 @@ class Server(IEventListener):
         self.server_broadcast('server shutdown, goodbye!')
         self.server_command('shutdown')
         self.running = False
-        self.socket_server.close()
+        self.ssocket.close()
 
     def accept_connections(self) -> None:
         logging.info('listening for incoming connections...')
         while self.running:
             try:
                 # todo: buscar como conseguir la direccion, sin aceptar la conexion
-
-                c_socket, c_addr = self.socket_server.accept()
+                c_socket, c_addr = self.ssocket.accept()
                 client = ClientConnection(socket=c_socket, address=c_addr)
                 if len(self.connection_manager.clients) + 1 > self.max_conns:
                     self._reject_connection(client)

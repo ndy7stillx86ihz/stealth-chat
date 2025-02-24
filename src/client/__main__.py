@@ -1,9 +1,7 @@
 import sys
 import argparse
 
-from client.services.client_service import ClientService
-from .models import Client
-
+from client.client import ClientApp
 
 def main() -> int:
     parser = argparse.ArgumentParser(description='socket chat client')
@@ -22,7 +20,7 @@ def main() -> int:
     except Exception as e:
         parser.error(str(e))
 
-    client = ClientService(Client(args.host, args.port))
+    client = ClientApp(args.host, args.port)
     client.start()
 
     return 0
