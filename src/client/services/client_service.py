@@ -17,6 +17,7 @@ from .connection_service import ConnectionService
 class ClientService(IEventListener):
     # todo: actualmente el cliente no sabe si el servidor
     #       le esta respondiendo, asi que debo poner algun sistema para parchear esto
+    # todo: dar mejor salida cuando hay un connection refused, poner un mensaje mas amigable
 
     def __init__(self, client: Client):
         self.client = client

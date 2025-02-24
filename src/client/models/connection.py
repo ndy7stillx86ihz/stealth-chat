@@ -15,6 +15,7 @@ class Connection:
 
         context = SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         context.check_hostname = False
+        # todo: manejar error, de cuando no hay certificado valido
         context.load_verify_locations(cafile="certs/server.crt")
 
         self.ssocket = context.wrap_socket(
