@@ -6,6 +6,10 @@
 
 Project that using the **[socket](https://docs.python.org/3/library/socket.html)** library in **Python**, through the *client-server-client* model implements a minimalistic *CLI Chat*. The server is a module that can handle multiple clients at the same time using the multi-threading functionalities. It's able to broadcast messages, execute specific commands for event handling, for communicating with clients. Both clients can chat with each other freely, while the server handles the communication between them. 
 
+## Use Cases
+
+If you find yourself in an insecure network, probably public, or just your job's LAN, can't access social media, or just don't want to distract yourself from your console, and wanna talk to a friend, maybe your couple or a crush, this tool might be helpfull, you can bind the server to your local network, and after both peers got the client, just start to chat and enjoy the process.
+
 ## Installation and usage
 
 > **Note:** 
@@ -68,10 +72,6 @@ uv run src/client -p <server-port> -H <server-host>
 ```
 
 > At first, you'll need to wait for the other peer to connect, you'll be able to send messages, but no one will receive them, whenever the peer sets up, the server will notify every client that there's at least one user to chat with.
-
-## Use Cases
-
-If you find yourself in an insecure network, probably public, or just your job's LAN, can't access social media, or just don't want to distract yourself from your console, and wanna talk to a friend, maybe your couple or a crush, then you can bind the server to your local network, and after both peers getting the client, just start to chat and enjoy the process.
 
 ## Known Issues
 
