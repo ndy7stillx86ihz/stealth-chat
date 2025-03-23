@@ -21,7 +21,7 @@ If you find yourself in an insecure network, probably public, or just your job's
 #### 1. First of all clone this repository and `cd` into it:
 
 ```sh
-git clone https://github.com/ndy7stillx86ihz/cli-socket-chat.git && cd cli-socket-chat
+git clone https://github.com/ndy7stillx86ihz/stealth-chat.git && cd stealth-chat
 ```
 
 #### 2. Only if you don't have [UV](https://docs.astral.sh/uv/) installed, set it up, *it may just take a few seconds:*
