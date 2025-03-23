@@ -1,18 +1,18 @@
 # Stealth Chat
-   ![app-sample](sample/ui-example.png)
 
+![app-sample](sample/ui-example.png)
 
 ## Description
 
-Project that using the **[socket](https://docs.python.org/3/library/socket.html)** library in **Python**, through the *client-server-client* model implements a minimalistic *CLI Chat*. The server is a module that can handle multiple clients at the same time using the multi-threading functionalities. It's able to broadcast messages, execute specific commands for event handling, for communicating with clients. Both clients can chat with each other freely, while the server handles the communication between them. 
+Project that using the **[socket](https://docs.python.org/3/library/socket.html)** library in **Python**, through the _client-server-client_ model implements a minimalistic _CLI Chat_. The server is a module that can handle multiple clients at the same time using multi-threading functionalities. It's able to broadcast messages, execute specific commands for event handling, for communicating with clients. Both clients can chat with each other freely, while the server handles the communication between them.
 
 ## Use Cases
 
-If you find yourself in an insecure network, probably public, or just your job's LAN, can't access social media, or just don't want to distract yourself from your console, and wanna talk to a friend, maybe your couple or a crush, this tool might be helpfull, you can bind the server to your local network, and after both peers got the client, just start to chat and enjoy the process.
+If you find yourself in an insecure network, probably public, or just your job's LAN, can't access social media, or just don't want to distract yourself from your console, and wanna talk to a partner, this tool might be helpful, you can bind the server to your local network, and after both peers got the client, just start to chat and enjoy the process.
 
 ## Installation and usage
 
-> **Note:** 
+> **Note:**
 >
 > The next steps must be followed for each host that's going to be part of your server, **except** for the step of generating the private key, and the self-signed certificate, that specifically step should only be made in the server host, the clients just need to copy the generated certificate (.crt) to their projects' `cert/server.crt`.
 
@@ -24,7 +24,7 @@ If you find yourself in an insecure network, probably public, or just your job's
 git clone https://github.com/ndy7stillx86ihz/stealth-chat.git && cd stealth-chat
 ```
 
-#### 2. Only if you don't have [UV](https://docs.astral.sh/uv/) installed, set it up, *it may just take a few seconds:*
+#### 2. Only if you don't have [UV](https://docs.astral.sh/uv/) installed, set it up, _it may just take a few seconds:_
 
 ##### For Linux, Mac-OS, WSL:
 
@@ -42,13 +42,16 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 #### 3. Generate a self-signed certificate, and a private key:
 
-##### Execute the `certs/gen-pair.sh` script to automatically generate both or copypaste the following command in your console: 
+##### Execute the `certs/gen-pair.sh` script to automatically generate both, or just copypaste the following command in your console:
 
 ```sh
-mkdir certs && \
 openssl genpkey -algorithm RSA -out certs/server.key -aes256 && \
 openssl req -new -x509 -key certs/server.key -out certs/server.crt -days 365
 ```
+
+> **Note:**
+>
+> It will ask you twice to introduce the password (the password must have at least 4 digits in both cases), first for the certificate, and the second for the private key, after that it will prompt you again for the certificate info, you can ignore those.
 
 #### 4. For each client you must copy the certificate `server.crt` that's in the `certs` folder to that same folder in the client host, if you are the one who hosted the server, you already have it locally, so there's no need to do it.
 
@@ -60,8 +63,7 @@ openssl req -new -x509 -key certs/server.key -out certs/server.crt -days 365
 uv run src/app.py server -p <port> -H <hostdir> -m <max-connections>
 ```
 
-
-> **Be sure of setting up the server before trying to connect with client,  if not, you'll get an exception**
+> **Be sure of setting up the server before trying to connect with client, if not, you'll get an exception**
 
 ### Client
 
@@ -75,11 +77,10 @@ uv run src/client -p <server-port> -H <server-host>
 
 ## Known Issues
 
-1. **Clients not being disconnected after closing server:** Sometimes after *KeyboardInterrumpting* the Server, the clients may just close as it's meant to be, but can also bug like receiving infinites messages.
+1. **Clients not being disconnected after closing server:** Sometimes after _KeyboardInterrumpting_ the Server, the clients may just close as it's meant to be, but can also bug like receiving infinites messages.
 
-   #### If you find any other Issue, please feel free to report it, or collaborating with the project :)
+    #### If you find any other Issue, please feel free to report it, or collaborating with the project :)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-

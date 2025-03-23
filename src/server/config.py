@@ -7,7 +7,7 @@ class Config:
     HOST = '0.0.0.0'
     PORT = 50000
     MAX_CONNS = 2
-    DEBUG = True
+    DEBUG = False
 
     @staticmethod
     def setup_logging():

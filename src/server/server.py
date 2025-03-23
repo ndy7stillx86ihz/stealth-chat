@@ -19,7 +19,6 @@ class Server(IEventListener):
     #     de los permitidos
     #       - actualizacion:
     #           el 3er cliente se conecta pero no envian sus mensajes: !!arreglar!!
-    #  - implementar end-to-end encryption
     #  - implementar un sistema de autenticacion
     #  - procesar comandos de los clientes
 
