@@ -1,4 +1,4 @@
-# CLI Socket Chat
+# Stealth Chat
    ![app-sample](sample/ui-example.png)
 
 
