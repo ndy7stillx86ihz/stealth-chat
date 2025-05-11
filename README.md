@@ -78,7 +78,7 @@ uv run src/client -p <server-port> -H <server-host>
 ## Known Issues
 
 1. **Clients not being disconnected after closing server:** Sometimes after _KeyboardInterrumpting_ the Server, the clients may just close as it's meant to be, but can also bug like receiving infinites messages.
-
+2. This README guide doesn't work as supossed, my bad LMAO.
     #### If you find any other Issue, please feel free to report it, or collaborating with the project :)
 
 ## License
